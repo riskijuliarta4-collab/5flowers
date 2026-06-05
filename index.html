@@ -26,15 +26,30 @@ body{
     height:100%;
     overflow:hidden;
 }
+
+/* ===================================================
+   FLOWER FIELD: Responsif & Lebih Besar di HP
+====================================================== */
 .flower-field{
     position:absolute;
     left:50%;
-    bottom:100px;
+    bottom:140px; /* Dinaikkan sedikit dari batas ground */
     transform: translateX(-50%);
-    width: 100%;          /* Memenuhi lebar layar pada perangkat kecil */
-    max-width: 900px;     /* Batas maksimal ukuran asli di desktop */
-    aspect-ratio: 9 / 6;  /* Menjaga proporsi SVG agar tidak gepeng */
+    width: 100%;          
+    max-width: 900px;     
+    aspect-ratio: 9 / 6;  
     pointer-events:none;
+    transform-origin: bottom center;
+    transition: transform 0.5s ease;
+}
+
+/* Kustomisasi Khusus untuk Layar HP */
+@media (max-width: 768px) {
+    .flower-field {
+        /* Zoom in sebesar 1.5 kali di HP agar bunga terlihat rimbun dan besar */
+        transform: translateX(-50%) scale(1.5); 
+        bottom: 160px;
+    }
 }
 
 .stem-svg{
@@ -113,6 +128,9 @@ body{
     100% { opacity: 0; transform: scale(0); }
 }
     
+/* ======================
+   BLOOMING FLOWERS (Bunga Mekar)
+====================== */
 .tulip {
     opacity: 0;
     animation: bloomTulip 2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
@@ -130,6 +148,9 @@ body{
     100% { opacity: 1; transform: scale(1); }
 }
 
+/* ======================
+   ANIMASI PUTING BELIUNG
+====================== */
 .chaos .tulip {
     transform: scale(0) rotate(1080deg) translate(300px, -500px) !important;
     opacity: 0 !important;
@@ -155,11 +176,14 @@ body{
     100% { transform: translate(1px, -1px) rotate(0.5deg); }
 }
 
+/* ===================================================
+   TOMBOL: Posisi Lebih Tinggi & Aman dari Home Button HP
+====================================================== */
 .prank-btn {
     position: absolute;
-    bottom: 40px;
+    bottom: 65px;          /* Dinaikkan ke 65px agar lolos dari navigasi gesture HP */
     left: 50%;
-    transform: translateX(-50%) scale(0);
+    transform: translateX(-50%) scale(0); 
     padding: 12px 28px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 14px;
@@ -207,7 +231,7 @@ body{
     z-index: 9999;
     justify-content: center;
     align-items: center;
-    padding: 20px; /* Pencegahan teks meluber di HP */
+    padding: 20px; 
 }
 
 .message-box {
@@ -255,16 +279,15 @@ body{
 ====================== */
 .moon{
     position:absolute;
-    top:40px; /* Diturunkan sedikit agar aman di layar kecil */
+    top:40px; 
     right:40px;
-    width:80px;  /* Mengecil di ukuran default mobile friendly */
+    width:80px;  
     height:80px;
     border-radius:50%;
     background:#fff8d7;
     box-shadow: 0 0 20px rgba(255,255,220,.8), 0 0 50px rgba(255,255,220,.3);
 }
 
-/* Responsivitas Ukuran Bulan untuk Desktop */
 @media (min-width: 768px) {
     .moon {
         top: 80px;
@@ -308,7 +331,7 @@ body{
     position:absolute;
     bottom:0;
     width:100%;
-    height:140px;
+    height:160px; /* Ditambah tingginya agar tombol menapak pas di atas tanah */
     background: linear-gradient(#1f4225, #112614);
     z-index: 5;
 }

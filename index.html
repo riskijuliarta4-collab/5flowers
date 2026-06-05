@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>5 Bunga Katanya</title>
+<title>Beautiful Garden Blossom</title>
 
 <style>
 *{
@@ -27,25 +27,31 @@ body{
     overflow:hidden;
 }
 
+/* ===================================================
+   PERBAIKAN RESPONSIVE: Menggunakan Max-Width & Aspect Ratio
+====================================================== */
 .flower-field{
     position:absolute;
     left:50%;
     bottom:100px;
     transform: translateX(-50%);
-    width:900px;
-    height:600px;
+    width: 100%;          /* Memenuhi lebar layar pada perangkat kecil */
+    max-width: 900px;     /* Batas maksimal ukuran asli di desktop */
+    aspect-ratio: 9 / 6;  /* Menjaga proporsi SVG agar tidak gepeng */
     pointer-events:none;
 }
 
 .stem-svg{
     position:absolute;
-    left:50%;
+    left:0;
     bottom:0;
-    transform: translateX(-50%);
-    width:900px;
-    height:600px;
+    width:100%;           /* Mengikuti skala pembungkus responsif */
+    height:100%;          /* Mengikuti skala pembungkus responsif */
 }
 
+/* ======================
+   STEMS (Batang)
+====================== */
 .stem{
     fill:none;
     stroke:#4c9b58;
@@ -68,6 +74,9 @@ body{
     to { stroke-dashoffset:0; }
 }
 
+/* ======================
+   LEAVES (Daun)
+====================== */
 .leaf {
     opacity: 0;
     transform-origin: initial; 
@@ -86,6 +95,9 @@ body{
     to{ opacity:1; transform: scale(1); }
 }
 
+/* ======================
+   BUDS (Kuncup)
+====================== */
 .bud {
     opacity: 0;
     transform-origin: center bottom;
@@ -105,6 +117,9 @@ body{
     100% { opacity: 0; transform: scale(0); }
 }
 
+/* ======================
+   BLOOMING FLOWERS (Bunga Mekar)
+====================== */
 .tulip {
     opacity: 0;
     animation: bloomTulip 2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
@@ -122,6 +137,9 @@ body{
     100% { opacity: 1; transform: scale(1); }
 }
 
+/* ======================
+   ANIMASI PUTING BELIUNG (CHAOS EFFECT)
+====================== */
 .chaos .tulip {
     transform: scale(0) rotate(1080deg) translate(300px, -500px) !important;
     opacity: 0 !important;
@@ -147,11 +165,14 @@ body{
     100% { transform: translate(1px, -1px) rotate(0.5deg); }
 }
 
+/* ======================
+   TOMBOL BADAI DI TANAH
+====================== */
 .prank-btn {
     position: absolute;
-    bottom: 40px;          /* Pas di tengah-tengah area tanah */
+    bottom: 40px;
     left: 50%;
-    transform: translateX(-50%) scale(0); /* Sembunyi di awal */
+    transform: translateX(-50%) scale(0);
     padding: 12px 28px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 14px;
@@ -164,8 +185,6 @@ body{
     box-shadow: 0 4px 15px rgba(0, 102, 204, 0.4);
     z-index: 100;
     opacity: 0;
-    
-    /* Animasi muncul setelah semua bunga mekar */
     animation: buttonFadeIn 1s cubic-bezier(0.34, 1.56, 0.64, 1) 7.6s forwards;
     transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
 }
@@ -173,7 +192,7 @@ body{
 @keyframes buttonFadeIn {
     to {
         opacity: 1;
-        transform: translateX(-50%) scale(1); /* Muncul pop-out proporsional */
+        transform: translateX(-50%) scale(1);
     }
 }
 
@@ -186,6 +205,9 @@ body{
     transform: translateX(-50%) translateY(1px) scale(0.98);
 }
 
+/* ======================
+   KOTAK PESAN RAHASIA
+====================== */
 .message-overlay {
     display: none;
     position: fixed;
@@ -198,15 +220,17 @@ body{
     z-index: 9999;
     justify-content: center;
     align-items: center;
+    padding: 20px; /* Pencegahan teks meluber di HP */
 }
 
 .message-box {
     background: #111a36;
     border: 2px solid #0066cc;
-    padding: 30px 40px;
+    padding: 30px 25px;
     border-radius: 15px;
     text-align: center;
-    max-width: 400px;
+    width: 100%;
+    max-width: 380px;
     color: white;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     transform: scale(0.7);
@@ -214,13 +238,13 @@ body{
 }
 
 .message-box h2 {
-    font-size: 24px;
+    font-size: 22px;
     margin-bottom: 15px;
     color: #4da6ff;
 }
 
 .message-box p {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.5;
     margin-bottom: 20px;
     opacity: 0.9;
@@ -244,13 +268,23 @@ body{
 ====================== */
 .moon{
     position:absolute;
-    top:80px;
-    right:120px;
-    width:120px;
-    height:120px;
+    top:40px; /* Diturunkan sedikit agar aman di layar kecil */
+    right:40px;
+    width:80px;  /* Mengecil di ukuran default mobile friendly */
+    height:80px;
     border-radius:50%;
     background:#fff8d7;
-    box-shadow: 0 0 30px rgba(255,255,220,.8), 0 0 80px rgba(255,255,220,.3);
+    box-shadow: 0 0 20px rgba(255,255,220,.8), 0 0 50px rgba(255,255,220,.3);
+}
+
+/* Responsivitas Ukuran Bulan untuk Desktop */
+@media (min-width: 768px) {
+    .moon {
+        top: 80px;
+        right: 120px;
+        width: 120px;
+        height: 120px;
+    }
 }
 
 .star{
@@ -267,23 +301,29 @@ body{
 
 .title{
     position:absolute;
-    top:60px;
+    top:40px;
     width:100%;
     text-align:center;
     color:white;
     z-index: 10;
+    padding: 0 20px;
 }
 
-.title h1{ font-weight:300; font-size:50px; letter-spacing:3px; }
-.title p{ margin-top:10px; opacity:.8; font-size:18px; }
+.title h1{ font-weight:300; font-size:32px; letter-spacing:2px; }
+.title p{ margin-top:6px; opacity:.8; font-size:14px; }
+
+@media (min-width: 768px) {
+    .title h1 { font-size: 50px; letter-spacing: 3px; }
+    .title p { font-size: 18px; margin-top: 10px; }
+}
 
 .ground{
     position:absolute;
     bottom:0;
     width:100%;
-    height:180px;
+    height:140px;
     background: linear-gradient(#1f4225, #112614);
-    z-index: 5; /* Berada di depan taman agar tombol di atasnya bisa diklik dengan aman */
+    z-index: 5;
 }
 </style>
 </head>
@@ -292,14 +332,19 @@ body{
 
 <div class="message-overlay" id="msgOverlay">
     <div class="message-box" id="msgBox">
-        <h2>Roboh bunganya...</h2>
-        <p>Hancur deh bunganya...</p>
-        <button class="close-btn" onclick="resetGarden()">Nih Buat Bangun Ulang Taman</button>
+        <h2>Oops! Kebobolan Badai...</h2>
+        <p>Tamannya hancur lebur ditiup angin puting beliung! Jangan sembarangan pencet tombol ya, hehehe. 😜</p>
+        <button class="close-btn" onclick="resetGarden()">Bangun Ulang Taman</button>
     </div>
 </div>
 
 <div class="scene" id="mainScene">
     <div class="moon"></div>
+
+    <div class="title">
+        <h1>Beautiful Garden</h1>
+        <p>Blooming softly under the night sky</p>
+    </div>
 
     <div class="flower-field" id="gardenField">
         <svg class="stem-svg" viewBox="0 0 900 600">
@@ -384,7 +429,7 @@ body{
     </div> 
 
     <div class="ground">
-        <button class="prank-btn" id="actionBtn" onclick="startStorm()">Kali ini bukan monyet</button>
+        <button class="prank-btn" id="actionBtn" onclick="startStorm()">Datangkan Angin!</button>
     </div>
 </div>
 
@@ -410,7 +455,6 @@ function startStorm() {
     const box = document.getElementById("msgBox");
     const btn = document.getElementById("actionBtn");
 
-    // Sembunyikan tombol saat badai dimulai
     btn.style.opacity = "0";
     btn.style.transform = "translateX(-50%) scale(0)";
 
@@ -437,7 +481,6 @@ function resetGarden() {
         overlay.style.display = "none";
         garden.classList.remove("chaos");
         
-        // Munculkan kembali tombolnya setelah taman di-reset dan mekar lagi
         setTimeout(() => {
             btn.style.opacity = "1";
             btn.style.transform = "translateX(-50%) scale(1)";
